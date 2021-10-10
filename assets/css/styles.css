@@ -1,10 +1,15 @@
 :root {
-  /* CSS HEX */
   --prussian-blue: #003049ff;
   --maximum-red: #d62828ff;
   --orange: #f77f00ff;
   --maximum-yellow-red: #fcbf49ff;
   --lemon-meringue: #eae2b7ff;
+  --alert-success-text: #0f5132;
+  --alert-success-background: #d1e7dd;
+  --alert-success-border: #badbcc;
+  --alert-danger-text: #842029;
+  --alert-danger-background: #f8d7da;
+  --alert-danger-border: #f5c2c7;
 }
 
 * {
@@ -105,6 +110,26 @@ body {
   background-color: var(--maximum-yellow-red);
   cursor: pointer;
   color: #000;
+}
+
+.answer-alert {
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.answer-alert-success {
+  color: var(--alert-success-text);
+  background-color: var(--alert-success-background);
+  border-color: var(--alert-success-border);
+}
+
+.answer-alert-danger {
+  color: var(--alert-danger-text);
+  background-color: var(--alert-danger-background);
+  border-color: var(--alert-danger-border);
 }
 
 @media screen and (max-width: 576px) {
