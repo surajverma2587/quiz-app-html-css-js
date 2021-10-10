@@ -16,6 +16,9 @@ const movieQuestions = [
   },
 ];
 
+// let count = movieQuestions.length * 5;
+let count = 5;
+
 const constructOptions = function (options) {
   const optionsContainer = document.createElement("div");
   optionsContainer.setAttribute("class", "options-container");
@@ -74,14 +77,35 @@ const removeStartContainer = function () {
   startContainer.remove();
 };
 
+const startTimer = function () {
+  // declare the timer tick function
+  const timerTick = function () {
+    // check if the countdown has reached 0
+    if (count >= 0) {
+      // render the countdown time in the document
+      document.getElementById("countdown").textContent = count;
+      count -= 1;
+    } else {
+      // render game over container
+      console.log("GAME OVER");
+      clearInterval(timer);
+    }
+  };
+
+  // declare the timer
+  const timer = setInterval(timerTick, 1000);
+};
+
 // function to execute when start button is called
 const startQuiz = function () {
-  console.log("start quiz");
   // remove start container
   removeStartContainer();
 
   // render question container
   renderQuestionContainer();
+
+  // start timer
+  startTimer();
 };
 
 // target the start quiz button
