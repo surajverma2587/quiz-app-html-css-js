@@ -136,6 +136,7 @@ body {
   text-align: center;
   background-color: var(--prussian-blue);
   color: var(--lemon-meringue);
+  margin-top: 4rem;
 }
 
 .form-container {

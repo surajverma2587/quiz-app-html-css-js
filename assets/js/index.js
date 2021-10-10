@@ -51,6 +51,43 @@ const constructAlert = function (className, text) {
   return alertDiv;
 };
 
+const constructForm = function () {
+  const divContainer = document.createElement("div");
+  divContainer.setAttribute("class", "container score-form");
+
+  const form = document.createElement("form");
+
+  const h2Element = document.createElement("h2");
+  h2Element.setAttribute("class", "question");
+  h2Element.textContent = "Your score is " + count;
+
+  const formContainer = document.createElement("div");
+  formContainer.setAttribute("class", "form-container");
+
+  const formInputDiv = document.createElement("div");
+  formInputDiv.setAttribute("class", "form-item");
+
+  const formInput = document.createElement("input");
+  formInput.setAttribute("placeholder", "Enter your initials");
+
+  const formButtonDiv = document.createElement("div");
+  formButtonDiv.setAttribute("class", "form-item");
+
+  const formButton = document.createElement("button");
+  formButton.setAttribute("class", "btn");
+  formButton.textContent = "Submit";
+
+  formInputDiv.append(formInput);
+  formButtonDiv.append(formButton);
+
+  formContainer.append(formInputDiv, formButtonDiv);
+
+  form.append(h2Element, formContainer);
+  divContainer.append(form);
+
+  return divContainer;
+};
+
 const renderSuccessAlert = function () {
   // construct alert
   const alert = constructAlert(
@@ -97,6 +134,17 @@ const renderDangerAlert = function () {
   const delay = setTimeout(afterWait, 1000);
 };
 
+const renderScoreForm = function () {
+  // remove the last question
+  removeQuestionContainer();
+
+  // construct score form
+  const form = constructForm();
+
+  // append form to document
+  document.getElementById("main-container").append(form);
+};
+
 const verifyAnswer = function (event) {
   const target = event.target;
   const currentTarget = event.currentTarget;
@@ -121,7 +169,7 @@ const verifyAnswer = function (event) {
       renderSuccessAlert();
     }
 
-    // go to next question
+    // go to next question 0 1 2 (3)
     currentQuestionIndex += 1;
 
     // check if last question
@@ -130,7 +178,7 @@ const verifyAnswer = function (event) {
       removeQuestionContainer();
       renderQuestionContainer();
     } else {
-      console.log("render score form");
+      renderScoreForm();
     }
   }
 };
@@ -188,15 +236,14 @@ const removeQuestionContainer = function () {
 const startTimer = function () {
   // declare the timer tick function
   const timerTick = function () {
-    // check if the countdown has reached 0
-    if (count >= 0) {
-      // render the countdown time in the document
+    if (currentQuestionIndex >= movieQuestions.length) {
+      clearInterval(timer);
+    } else if (count < 0) {
+      clearInterval(timer);
+      console.log("GAME OVER");
+    } else {
       document.getElementById("countdown").textContent = count;
       count -= 1;
-    } else {
-      // render game over container
-      console.log("GAME OVER");
-      clearInterval(timer);
     }
   };
 
