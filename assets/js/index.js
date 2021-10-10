@@ -204,7 +204,6 @@ const verifyAnswer = function (event) {
         document.getElementById("countdown").textContent = 0;
       }
     } else {
-      console.log("CORRECT");
       renderSuccessAlert();
     }
 

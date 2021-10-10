@@ -71,6 +71,8 @@ body {
   font-weight: 600;
   background-color: var(--lemon-meringue);
   color: #000;
+  min-width: 200px;
+  margin-bottom: 1rem;
 }
 
 .btn:hover {
@@ -179,6 +181,12 @@ body {
   background-color: var(--lemon-meringue);
 }
 
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 576px) {
   .nav-container {
     flex-direction: column;
@@ -192,5 +200,10 @@ body {
 
   .form-item input {
     width: 100%;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
