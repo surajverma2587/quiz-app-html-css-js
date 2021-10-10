@@ -2,22 +2,23 @@ const movieQuestions = [
   {
     title: "How many Harry Potter films are released?",
     options: ["3", "6", "8", "10"],
-    correctAnswer: "8",
+    correctOption: "8",
   },
   {
     title: "How many Back to the Future films are released?",
     options: ["2", "3", "1", "5"],
-    correctAnswer: "3",
+    correctOption: "3",
   },
   {
     title: "How many Rocky films are released?",
     options: ["1", "3", "4", "6"],
-    correctAnswer: "6",
+    correctOption: "6",
   },
 ];
 
-// let count = movieQuestions.length * 5;
-let count = 5;
+let count = movieQuestions.length * 5;
+// let count = 5;
+let currentQuestionIndex = 0;
 
 const constructOptions = function (options) {
   const optionsContainer = document.createElement("div");
@@ -30,6 +31,8 @@ const constructOptions = function (options) {
     // create my button
     const optionButton = document.createElement("button");
     optionButton.setAttribute("class", "option-item");
+    optionButton.setAttribute("name", "option");
+    optionButton.setAttribute("data-option", option);
     optionButton.textContent = option;
 
     // append to optionsContainer
@@ -39,10 +42,48 @@ const constructOptions = function (options) {
   return optionsContainer;
 };
 
+const verifyAnswer = function (event) {
+  const target = event.target;
+  const currentTarget = event.currentTarget;
+
+  // check if click is from button ONLY
+  if (target.getAttribute("name") === "option") {
+    // get the option user clicked on
+    const userOption = target.getAttribute("data-option");
+
+    // get the correct option for the question
+    const correctOption = currentTarget.getAttribute("data-correct");
+
+    console.log(userOption, correctOption);
+
+    // verify the 2
+    if (userOption !== correctOption) {
+      // time penalty deduct 5 seconds
+      count -= 5;
+    } else {
+      console.log("CORRECT");
+    }
+
+    // go to next question
+    currentQuestionIndex += 1;
+
+    // check if last question
+    if (currentQuestionIndex < movieQuestions.length) {
+      // render the next question
+      removeQuestionContainer();
+      renderQuestionContainer();
+    } else {
+      console.log("render score form");
+    }
+  }
+};
+
 const constructQuestionContainer = function (question) {
   // construct container div
   const questionContainer = document.createElement("div");
   questionContainer.setAttribute("class", "container question-container");
+  questionContainer.setAttribute("id", "question-container");
+  questionContainer.setAttribute("data-correct", question.correctOption);
 
   // construct h2 element
   const questionH2 = document.createElement("h2");
@@ -55,13 +96,16 @@ const constructQuestionContainer = function (question) {
   // appending h2 and options div to container div
   questionContainer.append(questionH2, options);
 
+  // add event listener to listen for click events
+  questionContainer.addEventListener("click", verifyAnswer);
+
   return questionContainer;
 };
 
 // render question container
 const renderQuestionContainer = function () {
   // get the current question
-  const currentQuestion = movieQuestions[0];
+  const currentQuestion = movieQuestions[currentQuestionIndex];
 
   // construct the HTML for the question container
   const questionContainer = constructQuestionContainer(currentQuestion);
@@ -75,6 +119,13 @@ const removeStartContainer = function () {
   const startContainer = document.getElementById("start-container");
   // remove from document
   startContainer.remove();
+};
+
+const removeQuestionContainer = function () {
+  // target question container
+  const questionContainer = document.getElementById("question-container");
+  // remove from document
+  questionContainer.remove();
 };
 
 const startTimer = function () {
