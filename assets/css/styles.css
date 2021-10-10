@@ -153,6 +153,12 @@ body {
   width: 75%;
 }
 
+.game-over {
+  text-align: center;
+  background-color: var(--prussian-blue);
+  color: var(--lemon-meringue);
+}
+
 @media screen and (max-width: 576px) {
   .nav-container {
     flex-direction: column;
