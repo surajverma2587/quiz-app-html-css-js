@@ -132,6 +132,27 @@ body {
   border-color: var(--alert-danger-border);
 }
 
+.score-form {
+  text-align: center;
+  background-color: var(--prussian-blue);
+  color: var(--lemon-meringue);
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item {
+  margin: 1rem 0;
+}
+
+.form-item input {
+  padding: 1rem 0.5rem;
+  font-size: 1rem;
+  width: 75%;
+}
+
 @media screen and (max-width: 576px) {
   .nav-container {
     flex-direction: column;
@@ -141,5 +162,9 @@ body {
   .container {
     margin: 0 1rem;
     padding: 2rem;
+  }
+
+  .form-item input {
+    width: 100%;
   }
 }
