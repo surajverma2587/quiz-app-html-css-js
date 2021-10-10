@@ -16,8 +16,8 @@ const movieQuestions = [
   },
 ];
 
-let count = movieQuestions.length * 5;
-// let count = 5;
+// let count = movieQuestions.length * 5;
+let count = 5;
 let currentQuestionIndex = 0;
 
 const constructOptions = function (options) {
@@ -233,6 +233,18 @@ const removeQuestionContainer = function () {
   questionContainer.remove();
 };
 
+const renderGameOver = function () {
+  const divContainer = document.createElement("div");
+  divContainer.setAttribute("class", "container game-over");
+
+  const h2Element = document.createElement("h2");
+  h2Element.textContent = "GAME OVER";
+
+  divContainer.append(h2Element);
+
+  document.getElementById("main-container").append(divContainer);
+};
+
 const startTimer = function () {
   // declare the timer tick function
   const timerTick = function () {
@@ -240,7 +252,8 @@ const startTimer = function () {
       clearInterval(timer);
     } else if (count < 0) {
       clearInterval(timer);
-      console.log("GAME OVER");
+      removeQuestionContainer();
+      renderGameOver();
     } else {
       document.getElementById("countdown").textContent = count;
       count -= 1;
