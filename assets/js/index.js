@@ -51,6 +51,39 @@ const constructAlert = function (className, text) {
   return alertDiv;
 };
 
+const getFromLocalStorage = function (key, defaultValue) {
+  const localStorageData = JSON.parse(localStorage.getItem(key));
+
+  if (!localStorageData) {
+    return defaultValue;
+  } else {
+    return localStorageData;
+  }
+};
+
+const storeScore = function () {
+  // get count value
+  const score = count;
+
+  // get user initials from input
+  const initials = document.getElementById("user-initials").value;
+
+  // construct score object
+  const scoreObject = {
+    score: score,
+    initials: initials,
+  };
+
+  // get from LS before inserting object
+  const highscores = getFromLocalStorage("highscores", []);
+
+  // insert the score object
+  highscores.push(scoreObject);
+
+  // write back to LS
+  localStorage.setItem("highscores", JSON.stringify(highscores));
+};
+
 const constructForm = function () {
   const divContainer = document.createElement("div");
   divContainer.setAttribute("class", "container score-form");
@@ -69,6 +102,7 @@ const constructForm = function () {
 
   const formInput = document.createElement("input");
   formInput.setAttribute("placeholder", "Enter your initials");
+  formInput.setAttribute("id", "user-initials");
 
   const formButtonDiv = document.createElement("div");
   formButtonDiv.setAttribute("class", "form-item");
@@ -84,6 +118,8 @@ const constructForm = function () {
 
   form.append(h2Element, formContainer);
   divContainer.append(form);
+
+  form.addEventListener("submit", storeScore);
 
   return divContainer;
 };
@@ -265,8 +301,19 @@ const startTimer = function () {
   const timer = setInterval(timerTick, 1000);
 };
 
+const initialLocalStorage = function () {
+  const dataFromLS = JSON.parse(localStorage.getItem("highscores"));
+
+  if (!dataFromLS) {
+    localStorage.setItem("highscores", JSON.stringify([]));
+  }
+};
+
 // function to execute when start button is called
 const startQuiz = function () {
+  // initialise local storage
+  initialLocalStorage();
+
   // remove start container
   removeStartContainer();
 
