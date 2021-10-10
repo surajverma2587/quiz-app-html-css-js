@@ -39,9 +39,46 @@ body {
   color: var(--lemon-meringue);
 }
 
+.main {
+  font-size: 1rem;
+}
+
+.start-container {
+  text-align: center;
+  margin: 0 2rem;
+  padding: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.btn {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+  background-color: var(--lemon-meringue);
+  color: #000;
+}
+
+.btn:hover {
+  background-color: var(--maximum-yellow-red);
+  cursor: pointer;
+  color: #fff;
+}
+
 @media screen and (max-width: 576px) {
   .nav-container {
     flex-direction: column;
     align-items: center;
+  }
+
+  .start-container {
+    margin: 0 1rem;
+    padding: 2rem;
   }
 }
