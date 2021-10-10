@@ -1,3 +1,12 @@
+:root {
+  /* CSS HEX */
+  --prussian-blue: #003049ff;
+  --maximum-red: #d62828ff;
+  --orange: #f77f00ff;
+  --maximum-yellow-red: #fcbf49ff;
+  --lemon-meringue: #eae2b7ff;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,4 +15,33 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   line-height: 1.4;
+  font-size: 10px;
+}
+
+.header {
+  color: var(--lemon-meringue);
+  font-size: 1.4rem;
+  background-color: var(--prussian-blue);
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav-item {
+  padding: 2rem;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: var(--lemon-meringue);
+}
+
+@media screen and (max-width: 576px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
